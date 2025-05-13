@@ -8,7 +8,7 @@ on:
 
 # Set permissions to allow GitHub Pages deployment actions
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
