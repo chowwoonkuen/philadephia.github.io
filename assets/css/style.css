@@ -60,47 +60,28 @@ body {
   -webkit-box-orient: vertical;
 }
 
-/* Responsive adjustments */
-@media (min-width: 992px) {
-  .icon-grid {
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  }
-}
-
-@media (max-width: 991px) and (min-width: 768px) {
+/* Responsive adjustments - modified to maintain consistent icon sizes */
+@media (max-width: 991px) {
   .icon-grid {
     grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-  }
-  
-  .icon img {
-    max-width: 150px;
-    max-height: 190px;
+    gap: 1.25rem;
   }
 }
 
-@media (max-width: 767px) and (min-width: 576px) {
+@media (max-width: 767px) {
   .icon-grid {
     grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-  }
-  
-  .icon img {
-    max-width: 140px;
-    max-height: 180px;
+    gap: 1rem;
   }
 }
 
 @media (max-width: 575px) {
   .icon-grid {
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 1rem;
+    gap: 0.875rem;
   }
   
-  .icon img {
-    max-width: 130px;
-    max-height: 170px;
-  }
-  
-  .icon {
-    padding: 1rem;
+  .container {
+    padding: 0.75rem;
   }
 }
