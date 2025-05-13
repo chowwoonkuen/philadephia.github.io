@@ -63,13 +63,13 @@ jobs:
             local title=$3
             mkdir -p "$lang/$cat"
 
-            echo "<!DOCTYPE html><html lang=\"$lang\"><head><meta charset=\"UTF-8\"/><title>${title}</title><link rel=\"stylesheet\" href=\"../../assets/css/style.css\"/></head><body><div class=\"container\"><h1>${title}</h1><div class=\"icon-grid\">" > "$lang/$cat/index.html"
+            echo '<!DOCTYPE html><html lang="'$lang'"><head><meta charset="UTF-8"/><title>'"$title"'</title><link rel="stylesheet" href="../../assets/css/style.css"/></head><body><div class="container"><h1>'"$title"'</h1><div class="icon-grid">' > "$lang/$cat/index.html"
 
             for file in "$lang/$cat"/*.pdf; do
               [ -e "$file" ] || continue
               filename=$(basename "$file")
               thumb="../../assets/thumbs/$lang/$cat/$(basename "$file" .pdf).png"
-              echo "<a href=\"$filename\" class=\"icon\" download><img src=\"$thumb\" alt=\"$filename\"/><span>$filename</span></a>" >> "$lang/$cat/index.html
+              echo "<a href=\"$filename\" class=\"icon\" download><img src=\"$thumb\" alt=\"$filename\"/><span>$filename</span></a>" >> "$lang/$cat/index.html"
             done
 
             echo "</div></div></body></html>" >> "$lang/$cat/index.html"
