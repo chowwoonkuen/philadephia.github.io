@@ -80,4 +80,5 @@ jobs:
         git config --local user.name "GitHub Action"
         git add .
         git diff --cached --exit-code || git commit -m "Auto-generate pages and thumbnails"
+        git remote set-url origin https://${{ secrets.PAT }}@github.com/${{ github.repository }}
         git push
