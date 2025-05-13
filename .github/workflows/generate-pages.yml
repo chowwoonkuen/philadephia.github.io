@@ -6,26 +6,24 @@ on:
       - main
   workflow_dispatch:
 
-# Set permissions to allow GitHub Pages deployment actions
 permissions:
   contents: write
   pages: write
   id-token: write
 
-# Allow only one concurrent deployment run
 concurrency:
   group: "pages"
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   generate:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: '16'
 
@@ -71,7 +69,7 @@ jobs:
               [ -e "$file" ] || continue
               filename=$(basename "$file")
               thumb="../../assets/thumbs/$lang/$cat/$(basename "$file" .pdf).png"
-              echo "<a href=\"$filename\" class=\"icon\" download><img src=\"$thumb\" alt=\"$filename\"/><span>$filename</span></a>" >> "$lang/$cat/index.html"
+              echo "<a href=\"$filename\" class=\"icon\" download><img src=\"$thumb\" alt=\"$filename\"/><span>$filename</span></a>" >> "$lang/$cat/index.html
             done
 
             echo "</div></div></body></html>" >> "$lang/$cat/index.html"
@@ -87,16 +85,19 @@ jobs:
           generate_html zh-hans poetry "诗歌"
           generate_html zh-hans devotional "灵修资料"
 
-      - name: Pull latest changes
-        run: git pull origin main --rebase
-
       - name: Commit generated files
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add .
-          git diff --cached --exit-code || git commit -m "Auto-generate pages and thumbnails"
-          git push
+          
+          # Only commit if there are changes
+          if [ -n "$(git diff --cached)" ]; then
+            git commit -m "Auto-generate pages and thumbnails"
+            git push
+          else
+            echo "No changes to commit"
+          fi
 
   deploy:
     needs: generate
