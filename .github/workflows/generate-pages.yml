@@ -74,11 +74,13 @@ jobs:
         generate_html zh-hans poetry 诗歌
         generate_html zh-hans devotional 灵修资料
 
-    - name: Commit generated files
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add .
-        git diff --cached --exit-code || git commit -m "Auto-generate pages and thumbnails"
-        git remote set-url origin https://${{ secrets.PAT }}@github.com/${{ github.repository }}
-        git push
+        - name: Pull latest changes
+          run: git pull origin main --rebase
+
+        - name: Commit generated files
+          run: |
+            git config --local user.email "action@github.com"
+            git config --local user.name "GitHub Action"
+            git add .
+            git diff --cached --exit-code || git commit -m "Auto-generate pages and thumbnails"
+            git push
