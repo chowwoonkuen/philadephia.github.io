@@ -13,7 +13,7 @@ body {
 
 .icon-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   gap: 1.5rem;
   margin-top: 1rem;
 }
@@ -38,9 +38,11 @@ body {
 }
 
 .icon img {
-  width: 160px;
-  height: 200px;
-  object-fit: cover;
+  width: auto;
+  height: auto;
+  max-width: 160px;
+  max-height: 200px;
+  object-fit: contain;
   border-radius: 5px;
   margin-bottom: 0.75rem;
 }
@@ -59,26 +61,43 @@ body {
 }
 
 /* Responsive adjustments */
-@media (min-width: 768px) {
+@media (min-width: 992px) {
+  .icon-grid {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  }
+}
+
+@media (max-width: 991px) and (min-width: 768px) {
+  .icon-grid {
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  }
+  
+  .icon img {
+    max-width: 150px;
+    max-height: 190px;
+  }
+}
+
+@media (max-width: 767px) and (min-width: 576px) {
   .icon-grid {
     grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   }
   
   .icon img {
-    width: 140px;
-    height: 180px;
+    max-width: 140px;
+    max-height: 180px;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 575px) {
   .icon-grid {
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     gap: 1rem;
   }
   
   .icon img {
-    width: 120px;
-    height: 150px;
+    max-width: 130px;
+    max-height: 170px;
   }
   
   .icon {
