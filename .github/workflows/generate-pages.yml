@@ -51,21 +51,21 @@ jobs:
           local lang=$1
           local cat=$2
           local title=$3
-
           mkdir -p $lang/$cat
-          cat > $lang/$cat/index.html << 'EOL'
+
+          cat > $lang/$cat/index.html << "HTML_EOF"
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8" />
-  <title>$title</title>
+  <title>${title}</title>
   <link rel="stylesheet" href="../../assets/css/style.css" />
 </head>
 <body>
   <div class="container">
-    <h1>$title</h1>
+    <h1>${title}</h1>
     <div class="icon-grid">
-EOL
+HTML_EOF
 
           for file in $lang/$cat/*.pdf; do
             [ -e "$file" ] || continue
